@@ -32,6 +32,10 @@ while True:
     if not reponse or len(reponse) == 0:
         reponse = " "
 
+    header = str(len(reponse.encode())).zfill(13)
+    print("header:", header)
+
+    s.sendall(header.encode())
     s.sendall(reponse.encode())
 
 
