@@ -26,11 +26,12 @@ while True:
     print("Commande : ", commande)
 
     reponse = terminal.commande_use(commande)
+    data_len = len(reponse)
 
-    header = str(len(reponse.encode())).zfill(13)
+    header = str(data_len).zfill(13)
     print("header:", header)
-
     s.sendall(header.encode())
-    s.sendall(reponse.encode())
+    if data_len > 0:
+        s.sendall(reponse)
 
 s.close()
